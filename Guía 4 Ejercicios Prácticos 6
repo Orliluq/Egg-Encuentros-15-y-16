@@ -1,0 +1,26 @@
+/// Realizar un subproceso que reciba una letra y muestre un mensaje si esa letra esta entre las
+/// letras "M" y "T". Recordar que Pseint le da un valor numérico a cada letra a través del Código
+/// Ascii, lo que nos deja usar operadores relacionales con letras y cadenas.
+
+Algoritmo m_y_t
+	
+	Definir letra Como Caracter
+	
+	Escribir "Escribe una letra:"
+	Leer letra
+	
+	letra = Mayusculas(letra)
+	entreLetras(letra)
+	
+FinAlgoritmo
+
+
+SubAlgoritmo entreLetras(letra)
+	
+	Si (letra >= "M" Y letra <= "T")  Entonces
+		Escribir "La letra " , letra , " si está entre M y T."
+	SiNo
+		Escribir "La letra " , letra , " no está entre M y T."
+	FinSi
+FinSubAlgoritmo
+	
