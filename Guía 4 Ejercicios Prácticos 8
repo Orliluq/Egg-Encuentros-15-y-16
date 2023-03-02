@@ -1,0 +1,184 @@
+/// Realice un algoritmo que solicite al usuario una fecha y muestre por pantalla la fecha anterior. 
+/// Para ello se deberá utilizar un procedimiento llamado diaAnterior que reciba una fecha 
+/// representada a través de tres enteros dia, mes y anio, y retorne la fecha anterior. Puede 
+/// asumir que dia, mes y anio representan una fecha válida. Realice pruebas de escritorio para 
+/// los valores dia=5, mes=10, anio=2012 y para dia=1, mes=3, anio=2004
+
+Algoritmo ejercicio8
+	
+	Definir dia, mes, anio Como Entero
+	
+	Escribir "";
+	Escribir "****** FECHA DE UN DIA ANTES ******";
+	Escribir "";
+	Escribir "Ingrese un Dia: " Sin Saltar
+	Leer dia;
+	Escribir "Ingrese un Mes: "  Sin Saltar
+	Leer mes;
+	Escribir "Ingrese un Año: " Sin Saltar
+	Leer anio;
+	
+	diaAnterio(dia,mes,anio)	
+	
+FinAlgoritmo
+
+SubProceso diaAnterio(dia,mes,anio)
+	
+	Definir esBisiesto Como Logico
+	Definir diaInvalio, mesInvalido, anioInvalido Como Logico
+	Definir ultimoDia Como Entero
+	Definir diaAnterior, mesAnterior, anioAnterior Como Entero
+	
+	diaInvalio = Falso
+	mesInvalido = Falso
+	anioInvalido = Falso
+	
+	diaAnterior = 0
+	mesAnterior = 0
+	anioAnterior = 0
+	
+	esBisiesto = Falso
+	
+	Si anio MOD 4 == 0 Y ((anio MOD 100 <> 0 ) O (anio MOD 400 == 0)) Entonces
+		esBisiesto = Verdadero
+	FinSi	
+	
+	Si anio < 1900 O anio > 9999 Entonces
+		anioInvalido = Verdadero
+	FinSi
+	
+	Si mes < 1 O mes > 12 Entonces
+		mesInvalido = Verdadero
+	FinSi
+	
+	Si dia < 1 O dia > 31 Entonces
+		diaInvalio = Verdadero
+	FinSi
+	
+	Mientras anioInvalido O mesInvalido O diaInvalio Hacer
+		
+		Escribir "";
+		Escribir "****** FECHA INVALIDA ******";
+		Escribir "";
+		Escribir "Dia: " Sin Saltar
+		Leer dia;
+		Escribir "Mes: "  Sin Saltar
+		Leer mes;
+		Escribir "Año: " Sin Saltar
+		Leer anio;
+		
+		diaInvalio=Falso
+		mesInvalido=Falso
+		anioInvalido=Falso
+		
+		diaAnterio(dia,mes,anio)
+		
+	FinMientras
+	
+	ultimoDia = obtenerUltimoDia(mes, esBisiesto)
+	
+	Escribir  "Bisiesto: ", esBisiesto
+	
+	Definir diaTxt, mesTxt, AnioTxt Como Caracter
+	
+	diaTxt = ConvertirATexto(dia)
+	mesTxt = ConvertirATexto(mes)
+	AnioTxt = ConvertirATexto(anio)
+	
+	Si dia < 10 Entonces
+		diaTxt = Concatenar("0" , ConvertirATexto(dia))
+	FinSi
+	
+	Si mes < 10 Entonces
+		mesTxt = Concatenar("0" , ConvertirATexto(mes))
+	FinSi
+	
+	anioTxt = ConvertirATexto(anio)
+	
+	Escribir ""	
+	Escribir  "Fecha tecleada: " , diaTxt+"/"+mesTxt+"/"+AnioTxt
+	Escribir ""	
+	Escribir ""
+	
+	diaAnterior = dia - 1
+	Si diaAnterior < 1 Entonces
+		mesAnterior = mes -1
+		ultimoDia = obtenerUltimoDia(mesAnterior,esBisiesto)
+		diaAnterior = ultimoDia
+		
+		Si mesAnterior <  1 Entonces
+			anioAnterior = anio -1
+			mesAnterior = 12		
+			ultimoDia = obtenerUltimoDia(mesAnterior,esBisiesto)
+			diaAnterior = ultimoDia
+		SiNo
+			anioAnterior = anio
+		FinSi		
+	SiNo
+// Cálculo del día Anterior = dia-1:
+		
+		mesAnterior = mes
+		anioAnterior = anio
+	FinSi
+	
+	esBisiesto = Falso
+//Cálculo si es año bisiesto:
+	
+	Si anioAnterior MOD 4 == 0 Y ( (anioAnterior MOD 100 <> 0 ) O (anioAnterior MOD 400 == 0) ) Entonces
+		esBisiesto = Verdadero
+	FinSi	
+	
+	Escribir ""
+	Escribir "****** SALIDA ******"
+	Escribir ""
+	
+	Escribir  "Dia: ",  diaAnterior
+	Escribir  "Mes: ",  mesAnterior
+	Escribir  "Año: ",  anioAnterior
+	Escribir  "Bisiesto: ", esBisiesto
+	
+	diaTxt = ConvertirATexto(diaAnterior)
+	mesTxt = ConvertirATexto(mesAnterior)
+	AnioTxt = ConvertirATexto(anioAnterior)
+	
+	Si diaAnterior < 10 Entonces
+		diaTxt = Concatenar("0" , ConvertirATexto(diaAnterior))
+	FinSi
+	
+	
+	Si mesAnterior < 10 Entonces
+		mesTxt = Concatenar("0" , ConvertirATexto(mesAnterior))
+	FinSi
+	
+	anioTxt = ConvertirATexto(anioAnterior)
+	
+	Escribir "";	
+	Escribir "La Fecha anterior es: " , diaTxt+"/"+mesTxt+"/"+AnioTxt
+	Escribir "";	
+	
+FinSubProceso
+
+Funcion retorno<-obtenerUltimoDia(mes, esBisiesto)
+	Definir retorno Como Entero
+	Segun mes
+		1: retorno=31
+		2: 
+			Si esBisiesto == Verdadero Entonces
+				retorno= 29
+			SiNo
+				retorno = 28
+			FinSi
+		3: retorno = 31
+		4: retorno = 30
+		5: retorno = 31
+		6: retorno = 30
+		7: retorno = 31
+		8: retorno = 31
+		9: retorno = 30
+		10: retorno = 31
+		11: retorno = 30
+		12: retorno = 31
+	FinSegun
+	
+FinFuncion
+	
