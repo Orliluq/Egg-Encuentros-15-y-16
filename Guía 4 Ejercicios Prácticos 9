@@ -1,0 +1,73 @@
+/// Diseñar un procedimiento que reciba una frase, y el programa remueva todas las vocales 
+/// repetidas. Al final el procedimiento mostrará la frase final.
+/// Por ejemplo:
+/// Entrada: "Habia una vez un barco"
+/// Salida: "Habi un vez n brco"
+/// Se marcan en rojo las repetidas sólo para explicar la consigna. Las vocales "e", "i" y "o" quedan 
+/// al no estar repetidas
+
+Algoritmo ejercicio9
+	
+	Definir a, b Como Caracter
+	Escribir "Ingrese una frase: ";
+	Leer a;
+	
+	a = Minusculas(a);
+	b="";
+	
+	vocaleaRepetidas(a,b)
+	
+	Escribir "Frase final: ", b;
+
+FinAlgoritmo
+
+SubProceso vocaleaRepetidas(fraseInicial, fraseFinal Por Referencia)
+	
+	Definir varLongitud, i, contVocalA, contVocalE, contVocalI, contVocalO, contVocalU Como Entero
+	Definir varSubcadena, varAux Como Caracter
+	
+	contVocalA = 0;
+	contVocalE = 0;
+	contVocalI = 0;
+	contVocalO = 0;
+	contVocalU = 0;
+	
+	varLongitud = Longitud(fraseInicial)
+	
+	varSubcadena = "";
+	varAux = "";
+	
+	Para i=0 Hasta varLongitud Con Paso 1 Hacer
+		varSubcadena = Subcadena(fraseInicial, i, i)
+		Si varSubcadena = "a" Entonces
+			contVocalA = contVocalA + 1
+		Fin Si
+		
+		Si varSubcadena = "e" Entonces
+			contVocalE = contVocalE + 1
+		Fin Si
+		
+		Si varSubcadena = "i" Entonces
+			contVocalI = contVocalI + 1
+		Fin Si
+		
+		Si varSubcadena = "o" Entonces
+			contVocalO = contVocalO + 1
+		Fin Si
+		
+		Si varSubcadena = "u" Entonces
+			contVocalU = contVocalU + 1
+		Fin Si
+		
+	Fin Para
+	
+	Para i=0 Hasta varLongitud Con Paso 1 Hacer
+		varSubcadena = Subcadena(fraseInicial, i, i)
+		Si (varSubcadena = "a" Y contVocalA > 1) O (varSubcadena = "e" Y contVocalE > 1) O (varSubcadena = "i"  Y contVocalI > 1) O (varSubcadena = "o" Y contVocalO > 1) O (varSubcadena = "u" Y contVocalU > 1) Entonces
+			fraseFinal = Concatenar(fraseFinal, "");
+		SiNo
+			fraseFinal = Concatenar(fraseFinal, varSubcadena);
+		Fin Si
+	Fin Para
+	
+FinSubProceso
