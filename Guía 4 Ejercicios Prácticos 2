@@ -1,0 +1,24 @@
+/// Crear un procedimiento que calcule la temperatura media de un día a partir de la temperatura
+/// máxima y mínima. Crear un programa principal, que, utilizando un procedimiento, vaya
+/// pidiendo la temperatura máxima y mínima de n días y vaya mostrando la media de cada día. El
+/// programa pedirá el número de días que se van a introducir.
+
+	SubProceso  calcular(dia) 
+		Definir minima, maxima Como Entero;	
+		Escribir "La temperatura mínima para el día ", dia;
+		Leer  minima;
+		Escribir "La temperatura máxima para el día: " dia;
+		Leer maxima;
+		Escribir "La media de grados para el día: ", dia " es: ", (minima + maxima) / 2 " Grados";
+	FinSubProceso
+
+Algoritmo ejercicio2
+	
+	Definir i, nDias Como Entero
+	Escribir "Ingrese la cantidad de días: ";
+	Leer nDias;
+	Para i = 1 Hasta nDias Hacer
+		calcular(i);
+	FinPara
+	
+FinAlgoritmo
